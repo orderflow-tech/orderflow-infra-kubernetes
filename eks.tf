@@ -1,6 +1,6 @@
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"  # Use version 18.x which has better Academy compatibility
+  source  = "terraform-aws-modules/eks/aws?ref=v18.0.0"
+  version = "18.0.0" # Use version 18.x which has better Academy compatibility
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
@@ -10,12 +10,12 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   # AWS Academy compatible configuration
-  enable_irsa = false  # Disable IRSA for AWS Academy
-  
+  enable_irsa = false # Disable IRSA for AWS Academy
+
   # Use custom IAM roles to avoid session context issues
   create_iam_role = false
   iam_role_arn    = data.aws_iam_role.cluster.arn
-  
+
   # Manage aws-auth ConfigMap
   manage_aws_auth_configmap = true
 
@@ -52,7 +52,7 @@ module "eks" {
 
       # Disable launch template to avoid user data issues
       use_custom_launch_template = false
-      
+
       # Basic configuration without SSH access for simplicity
       # SSH access can be configured later if needed
 

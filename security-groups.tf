@@ -2,6 +2,7 @@
 resource "aws_security_group" "cluster" {
   name_prefix = "${var.project_name}-cluster-"
   vpc_id      = aws_vpc.main.id
+  description = "Security group for EKS cluster control plane"
 
   ingress {
     description = "HTTPS"
@@ -28,6 +29,7 @@ resource "aws_security_group" "cluster" {
 resource "aws_security_group" "node_group" {
   name_prefix = "${var.project_name}-node-group-"
   vpc_id      = aws_vpc.main.id
+  description = "Security group for EKS worker nodes"
 
   ingress {
     description = "Node to node communication"
@@ -78,6 +80,7 @@ resource "aws_security_group" "node_group" {
 resource "aws_security_group" "rds" {
   name_prefix = "${var.project_name}-rds-"
   vpc_id      = aws_vpc.main.id
+  description = "Security group for RDS instances"
 
   ingress {
     description     = "PostgreSQL from EKS nodes"
