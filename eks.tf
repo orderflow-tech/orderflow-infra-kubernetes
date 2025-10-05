@@ -11,6 +11,11 @@ module "eks" {
   # checkov:skip=CKV_AWS_37:Public endpoint access is required for AWS Academy setup
   cluster_endpoint_public_access = true
 
+  # Enable CloudWatch logging with encryption
+  create_cloudwatch_log_group     = true
+  cloudwatch_log_group_kms_key_id = module.cloudwatch_kms_key.key_id
+  cluster_enabled_log_types       = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  
   # AWS Academy compatible configuration
   enable_irsa = false # Disable IRSA for AWS Academy
 
@@ -52,8 +57,12 @@ module "eks" {
       # Disable launch template to avoid user data issues
       use_custom_launch_template = false
 
-      # Basic configuration without SSH access for simplicity
-      # SSH access can be configured later if needed
+      # Enhanced security configuration
+      metadata_options = {
+        http_endpoint               = "enabled"
+        http_tokens                 = "required"  # IMDSv2 required
+        http_put_response_hop_limit = 1
+      }
 
       # Node group update configuration
       update_config = {

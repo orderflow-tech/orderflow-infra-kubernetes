@@ -103,6 +103,8 @@ variable "tags" {
     Project     = "OrderFlow"
     Environment = "Production"
     ManagedBy   = "Terraform"
+    Security    = "High"
+    Compliance  = "PCI"
   }
 }
 
