@@ -3,12 +3,12 @@
 
 # checkov:skip=CKV_AWS_40:AWS Academy provided role
 data "aws_iam_role" "cluster" {
-  name = "c173096a4485959l11929557t1w285654-LabEksClusterRole-4RwAkeZCCDlY"
+  name = "LabRole"
 }
 
 # checkov:skip=CKV_AWS_40:AWS Academy provided role
 data "aws_iam_role" "node_group" {
-  name = "c173096a4485959l11929557t1w285654864-LabEksNodeRole-DqWPx0IgWLjd"
+  name = "LabRole"
 }
 
 # Commented out - AWS Academy doesn't allow role creation
