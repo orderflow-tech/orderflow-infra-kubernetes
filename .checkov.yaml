@@ -1,0 +1,11 @@
+skip-check:
+  - CKV_AWS_130:
+      id: "aws_subnet.public"
+      comment: "Public subnets require auto-assigned public IPs for NAT Gateways and EKS Load Balancers in AWS Academy environment"
+  - CKV2_AWS_5:
+      - id: "aws_security_group.cluster"
+        comment: "Security group is automatically attached to EKS cluster control plane ENIs by AWS during cluster creation"
+      - id: "aws_security_group.node_group"
+        comment: "Security group is automatically attached to EKS worker nodes ENIs by the EKS module"
+      - id: "aws_security_group.rds"
+        comment: "Security group is pre-created for future RDS instances"

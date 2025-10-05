@@ -57,3 +57,10 @@ kubeconfig
 *.bak
 *.tmp
 .cache/
+
+# Python
+.venv/
+venv/
+*.pyc
+__pycache__/
+.python-version
