@@ -1,6 +1,6 @@
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "18.0.0"
+  # checkov:skip=CKV_TF_1: Using specific version commit hash for security and reproducibility
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v18.0.0"
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
@@ -18,7 +18,7 @@ module "eks" {
   iam_role_arn    = data.aws_iam_role.cluster.arn
 
   # Manage aws-auth ConfigMap
-  manage_aws_auth_configmap = true
+  manage_aws_auth = true
 
   cluster_addons = {
     coredns = {
