@@ -60,7 +60,7 @@ module "eks" {
       # Enhanced security configuration
       metadata_options = {
         http_endpoint               = "enabled"
-        http_tokens                 = "required"  # IMDSv2 required
+        http_tokens                 = "required" # IMDSv2 required
         http_put_response_hop_limit = 1
       }
 
