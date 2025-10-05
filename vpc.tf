@@ -20,7 +20,6 @@ resource "aws_internet_gateway" "main" {
 }
 
 # Subnets Públicas
-#checkov:skip=CKV_AWS_130:Required for NAT Gateway and EKS Load Balancers
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
