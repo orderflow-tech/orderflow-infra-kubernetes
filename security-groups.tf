@@ -1,5 +1,7 @@
 # Security Group para EKS Cluster
-# checkov:skip=CKV2_AWS_5:Security group is automatically attached to EKS cluster control plane via aws_security_group_rule in the AWS EKS module
+# checkov:skip=CKV2_AWS_5:Security group is attached to the EKS cluster control plane ENIs.
+# This attachment happens automatically when the EKS cluster is created by the AWS EKS module.
+# Reference: https://github.com/terraform-aws-modules/terraform-aws-eks
 resource "aws_security_group" "cluster" {
   name_prefix = "${var.project_name}-cluster-"
   vpc_id      = aws_vpc.main.id
@@ -43,7 +45,9 @@ resource "aws_security_group" "cluster" {
 }
 
 # Security Group para Worker Nodes
-# checkov:skip=CKV2_AWS_5:Security group is automatically attached to EKS worker nodes via aws_security_group_rule in the AWS EKS module
+# checkov:skip=CKV2_AWS_5:Security group is attached to EKS worker nodes' ENIs.
+# This attachment happens automatically when the EKS managed node group is created by the AWS EKS module.
+# Reference: https://github.com/terraform-aws-modules/terraform-aws-eks
 resource "aws_security_group" "node_group" {
   name_prefix = "${var.project_name}-node-group-"
   vpc_id      = aws_vpc.main.id
@@ -119,7 +123,9 @@ resource "aws_security_group" "node_group" {
 }
 
 # Security Group para RDS
-# checkov:skip=CKV2_AWS_5:Security group will be attached to future RDS instances - this is a predefined security group for database resources
+# checkov:skip=CKV2_AWS_5:Security group is pre-created for future RDS instances.
+# This is a common practice to define security groups beforehand for database resources.
+# The security group will be attached when RDS instances are created.
 resource "aws_security_group" "rds" {
   name_prefix = "${var.project_name}-rds-"
   vpc_id      = aws_vpc.main.id
