@@ -20,8 +20,7 @@ resource "aws_internet_gateway" "main" {
 }
 
 # Subnets Públicas
-#tfsec:ignore:aws-ec2-no-public-ip-subnet
-#checkov:skip=CKV_AWS_130:Public subnets require auto-assigned public IPs for NAT Gateways and Load Balancers in AWS Academy setup
+#checkov:skip=CKV_AWS_130:Required for NAT Gateway and EKS Load Balancers
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
