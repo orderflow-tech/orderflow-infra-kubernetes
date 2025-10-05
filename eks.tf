@@ -15,7 +15,7 @@ module "eks" {
   create_cloudwatch_log_group     = true
   cloudwatch_log_group_kms_key_id = module.cloudwatch_kms_key.key_id
   cluster_enabled_log_types       = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-  
+
   # AWS Academy compatible configuration
   enable_irsa = false # Disable IRSA for AWS Academy
 
