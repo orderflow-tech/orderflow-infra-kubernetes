@@ -1,5 +1,6 @@
 module "eks" {
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=6ff058c35fb4d0c127a52c86718fc0222f04cc11" # v18.0.0 commit hash
+  source  = "terraform-aws-modules/eks/aws"
+  version = "18.0.0"
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
