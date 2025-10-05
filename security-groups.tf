@@ -1,5 +1,5 @@
 # Security Group para EKS Cluster
-# checkov:skip=CKV2_AWS_5: "Security group will be attached to EKS cluster by the eks module"
+# checkov:skip=CKV2_AWS_5:Security group will be attached to EKS cluster by the eks module
 resource "aws_security_group" "cluster" {
   name_prefix = "${var.project_name}-cluster-"
   vpc_id      = aws_vpc.main.id
@@ -43,7 +43,7 @@ resource "aws_security_group" "cluster" {
 }
 
 # Security Group para Worker Nodes
-# checkov:skip=CKV2_AWS_5: "Security group will be attached to EKS nodes by the eks module"
+# checkov:skip=CKV2_AWS_5:Security group will be attached to EKS nodes by the eks module
 resource "aws_security_group" "node_group" {
   name_prefix = "${var.project_name}-node-group-"
   vpc_id      = aws_vpc.main.id
@@ -119,7 +119,7 @@ resource "aws_security_group" "node_group" {
 }
 
 # Security Group para RDS
-# checkov:skip=CKV2_AWS_5: "Security group will be attached to RDS instances when created"
+# checkov:skip=CKV2_AWS_5:Security group will be attached to RDS instances when created
 resource "aws_security_group" "rds" {
   name_prefix = "${var.project_name}-rds-"
   vpc_id      = aws_vpc.main.id

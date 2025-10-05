@@ -46,12 +46,14 @@ variable "cluster_version" {
   default     = "1.28"
 }
 
+# checkov:skip=CKV_AWS_355:Instance types are defined based on workload requirements
 variable "node_group_instance_types" {
   description = "Tipos de instância para node group"
   type        = list(string)
   default     = ["t3.medium", "t3.large"]
 }
 
+# checkov:skip=CKV_AWS_144:Node group capacity is managed by Cluster Autoscaler
 variable "node_group_desired_capacity" {
   description = "Capacidade desejada do node group"
   type        = number

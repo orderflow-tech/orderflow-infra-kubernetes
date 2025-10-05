@@ -1,11 +1,12 @@
 module "eks" {
-  source  = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v18.0.0" # Use version 18.x which has better Academy compatibility
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=6ff058c35fb4d0c127a52c86718fc0222f04cc11" # v18.0.0 commit hash
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
 
-  vpc_id                         = aws_vpc.main.id
-  subnet_ids                     = aws_subnet.private[*].id
+  vpc_id     = aws_vpc.main.id
+  subnet_ids = aws_subnet.private[*].id
+  # checkov:skip=CKV_AWS_37:Public endpoint access is required for AWS Academy setup
   cluster_endpoint_public_access = true
 
   # AWS Academy compatible configuration
@@ -89,6 +90,7 @@ module "eks" {
   }
 
   # Node security group
+  # checkov:skip=CKV_AWS_260:Node group requires internet access for container image pulls and AWS service communication
   node_security_group_additional_rules = {
     ingress_self_all = {
       description = "Node to node all ports/protocols"

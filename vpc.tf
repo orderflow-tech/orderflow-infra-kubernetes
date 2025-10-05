@@ -20,7 +20,7 @@ resource "aws_internet_gateway" "main" {
 }
 
 # Subnets Públicas
-# checkov:skip=CKV_AWS_130: "Public subnets need to auto-assign public IPs for NAT Gateways and Load Balancers"
+# checkov:skip=CKV_AWS_130:Public subnets need to auto-assign public IPs for NAT Gateways and Load Balancers in EKS architecture
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
