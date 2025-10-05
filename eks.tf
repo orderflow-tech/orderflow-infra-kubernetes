@@ -1,6 +1,5 @@
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "18.0.0" # Use version 18.x which has better Academy compatibility
+  source  = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v18.0.0" # Use version 18.x which has better Academy compatibility
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
