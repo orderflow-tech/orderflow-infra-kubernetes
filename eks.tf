@@ -1,6 +1,7 @@
 module "eks" {
   # checkov:skip=CKV_TF_1: Using specific version commit hash for security and reproducibility
-  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v18.0.0"
+  source = "terraform-aws-modules/eks/aws"
+  version = "19.15.3"
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
@@ -16,9 +17,6 @@ module "eks" {
   # Use custom IAM roles to avoid session context issues
   create_iam_role = false
   iam_role_arn    = data.aws_iam_role.cluster.arn
-
-  # Manage aws-auth ConfigMap
-  manage_aws_auth = true
 
   cluster_addons = {
     coredns = {
