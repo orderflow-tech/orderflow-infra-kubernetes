@@ -1,6 +1,6 @@
 module "eks" {
   # checkov:skip=CKV_TF_1: Using specific version commit hash for security and reproducibility
-  source = "terraform-aws-modules/eks/aws"
+  source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
 
   cluster_name    = "${var.project_name}-${var.environment}"
