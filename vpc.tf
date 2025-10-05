@@ -20,10 +20,8 @@ resource "aws_internet_gateway" "main" {
 }
 
 # Subnets Públicas
-# checkov:skip=CKV_AWS_130: Public subnets require auto-assigned public IPs for:
-#   1. NAT Gateways to provide internet access for private subnets
-#   2. AWS Load Balancers to expose EKS services
-#   3. Required by EKS for public endpoint access in AWS Academy setup
+#tfsec:ignore:aws-ec2-no-public-ip-subnet
+#checkov:skip=CKV_AWS_130:Public subnets require auto-assigned public IPs for NAT Gateways and Load Balancers in AWS Academy setup
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
