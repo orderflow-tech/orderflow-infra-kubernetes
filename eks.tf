@@ -1,7 +1,7 @@
 module "eks" {
   # checkov:skip=CKV_TF_1: Using specific version commit hash for security and reproducibility
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.15.3"
+  version = "18.31.2"
 
   cluster_name    = "${var.project_name}-${var.environment}"
   cluster_version = var.cluster_version
@@ -11,10 +11,9 @@ module "eks" {
   # checkov:skip=CKV_AWS_37:Public endpoint access is required for AWS Academy setup
   cluster_endpoint_public_access = true
 
-  # Enable CloudWatch logging with encryption
-  create_cloudwatch_log_group     = true
-  cloudwatch_log_group_kms_key_id = module.cloudwatch_kms_key.key_id
-  cluster_enabled_log_types       = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  # Enable CloudWatch logging without encryption for AWS Lab compatibility
+  create_cloudwatch_log_group = true
+  cluster_enabled_log_types   = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
   # AWS Academy compatible configuration
   enable_irsa = false # Disable IRSA for AWS Academy
@@ -22,6 +21,9 @@ module "eks" {
   # Use custom IAM roles to avoid session context issues
   create_iam_role = false
   iam_role_arn    = data.aws_iam_role.cluster.arn
+
+  # Disable aws-auth configmap management in the module
+  manage_aws_auth_configmap = false
 
   cluster_addons = {
     coredns = {

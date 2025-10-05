@@ -5,33 +5,11 @@ resource "aws_flow_log" "vpc_flow_log" {
   vpc_id          = aws_vpc.main.id
 }
 
-resource "aws_kms_key" "cloudwatch" {
-  description             = "KMS key for CloudWatch Log Groups"
-  deletion_window_in_days = 7
-  enable_key_rotation     = true
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid    = "Enable IAM User Permissions"
-        Effect = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-        }
-        Action   = "kms:*"
-        Resource = "*"
-      }
-    ]
-  })
-
-  tags = var.tags
-}
+# Using the consolidated KMS key from kms.tf
 
 resource "aws_cloudwatch_log_group" "vpc_flow_log" {
   name              = "/aws/vpc-flow-log/${var.project_name}"
   retention_in_days = 365
-  kms_key_id        = aws_kms_key.cloudwatch.arn
 
   tags = var.tags
 }

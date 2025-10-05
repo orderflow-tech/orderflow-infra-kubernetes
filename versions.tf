@@ -18,6 +18,14 @@ terraform {
       source  = "hashicorp/tls"
       version = "~> 4.0"
     }
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.9"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.0"
+    }
   }
 
   # Backend S3 disabled for AWS Academy (use local backend)

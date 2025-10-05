@@ -70,6 +70,18 @@ resource "helm_release" "metrics_server" {
     value = "{--kubelet-insecure-tls,--kubelet-preferred-address-types=InternalIP\\,ExternalIP\\,Hostname}"
   }
 
-  depends_on = [module.eks.eks_managed_node_groups]
+  depends_on = [
+    time_sleep.wait_for_cluster,
+    null_resource.update_kubeconfig
+  ]
+
+  # Add timeout for Helm operations
+  timeout = 600
+
+  # Wait for cluster to be ready
+  wait = true
+
+  # Force recreation when cluster changes
+  recreate_pods = true
 }
 
