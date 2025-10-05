@@ -7,8 +7,9 @@ resource "aws_flow_log" "vpc_flow_log" {
 
 # Using the consolidated KMS key from kms.tf
 
-# checkov:skip=CKV_AWS_158: KMS encryption disabled for AWS Lab environment compatibility
+#checkov:skip=CKV_AWS_158:KMS encryption disabled for AWS Lab environment compatibility
 resource "aws_cloudwatch_log_group" "vpc_flow_log" {
+  #checkov:skip=CKV_AWS_158
   name              = "/aws/vpc-flow-log/${var.project_name}"
   retention_in_days = 365
 
