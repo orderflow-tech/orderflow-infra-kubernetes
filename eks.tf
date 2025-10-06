@@ -138,6 +138,7 @@ resource "aws_key_pair" "eks_nodes" {
   
   lifecycle {
     ignore_changes = [key_name, public_key]
+    create_before_destroy = true
   }
 }
 
