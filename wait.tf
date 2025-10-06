@@ -1,7 +1,6 @@
 resource "time_sleep" "wait_for_cluster" {
   depends_on = [
     module.eks.cluster_endpoint,
-    kubernetes_config_map_v1.aws_auth,
     null_resource.update_kubeconfig
   ]
 
