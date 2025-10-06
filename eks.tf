@@ -135,5 +135,9 @@ resource "aws_key_pair" "eks_nodes" {
   public_key = tls_private_key.eks_nodes.public_key_openssh
 
   tags = var.tags
+  
+  lifecycle {
+    ignore_changes = [key_name, public_key]
+  }
 }
 

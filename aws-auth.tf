@@ -1,5 +1,9 @@
 resource "kubernetes_config_map_v1" "aws_auth" {
-  depends_on = [module.eks.cluster_id]
+  depends_on = [
+    module.eks.cluster_id,
+    module.eks.cluster_endpoint,
+    module.eks.cluster_certificate_authority_data
+  ]
 
   metadata {
     name      = "aws-auth"
@@ -19,5 +23,9 @@ resource "kubernetes_config_map_v1" "aws_auth" {
         groups   = ["system:bootstrappers", "system:nodes"]
       }
     ])
+  }
+
+  lifecycle {
+    ignore_changes = [data]
   }
 }
