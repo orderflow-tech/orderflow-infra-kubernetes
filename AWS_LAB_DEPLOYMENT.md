@@ -18,6 +18,10 @@
 - **Problem**: ConfigMap trying to connect to localhost
 - **Solution**: Updated dependencies and added lifecycle rules
 
+### 5. Terraform Validation Error
+- **Problem**: Reference to undeclared resource `kubernetes_config_map_v1.aws_auth`
+- **Solution**: Removed dependencies on aws_auth from `cluster-config.tf` and `wait.tf`
+
 ## Deployment Steps for AWS Lab
 
 ### Prerequisites
