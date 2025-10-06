@@ -1,7 +1,7 @@
 skip-check:
   - CKV_AWS_130:
-      id: "aws_subnet.public"
-      comment: "Public subnets require auto-assigned public IPs for NAT Gateways and EKS Load Balancers in AWS Academy environment"
+      - id: "aws_subnet.public"
+        comment: "Public subnets require auto-assigned public IPs for NAT Gateways and EKS Load Balancers in AWS Academy environment"
   - CKV2_AWS_5:
       - id: "aws_security_group.cluster"
         comment: "Security group is automatically attached to EKS cluster control plane ENIs by AWS during cluster creation"
@@ -10,5 +10,5 @@ skip-check:
       - id: "aws_security_group.rds"
         comment: "Security group is pre-created for future RDS instances"
   - CKV2_AWS_11:
-      id: "aws_vpc.main"
-      comment: "VPC Flow Logs disabled in AWS Lab environment due to IAM restrictions and CloudWatch Logs limitations"
+      - id: "aws_vpc.main"
+        comment: "VPC Flow Logs disabled in AWS Lab environment due to IAM restrictions and CloudWatch Logs limitations"
